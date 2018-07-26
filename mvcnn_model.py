@@ -28,6 +28,7 @@ def load_vgg():
     n_conv.weight.data[:,4,:,:] = (trained_kernel.data[:, 1, :, :] + trained_kernel.data[:, 2, :, :])/2
     return nn.Sequential(n_conv, feature)
 
+# The model class for multiview cnn with non commutative merge operation
 class MVConv(nn.Module):
     def __init__(self):
         super(MVConv, self).__init__()
