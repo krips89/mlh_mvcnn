@@ -1,3 +1,4 @@
 *.tar
 *.pyc
 data
+.idea
