@@ -1,7 +1,6 @@
 from config import *
 import sys
 import time
-
 import torch
 import torch.nn as nn
 import torch.nn.parallel
@@ -14,17 +13,12 @@ from mvcnn_model import MVConv
 from dataset import ModelNetDataset, ToTensor
 from torch.utils.data import Dataset, DataLoader
 from utils import accuracy, AverageMeter
-
-
 # Ignore warnings
 import warnings
 warnings.filterwarnings("ignore")
 
 use_gpu = torch.cuda.is_available()
 print_freq=10
-
-
-
 
 def test(val_loader, model, criterion):
     batch_time = AverageMeter()
@@ -37,8 +31,9 @@ def test(val_loader, model, criterion):
 
     end = time.time()
     for i, (input, target) in enumerate(val_loader):
-        input= input.cuda()
 
+        if use_gpu:
+            input = input.cuda()
 
         in1 = input[:,0,:,:,:]
         in2 = input[:,1,:,:,:]
@@ -49,7 +44,6 @@ def test(val_loader, model, criterion):
            input_var2 = torch.autograd.Variable(in2.float().cuda())
            input_var3 = torch.autograd.Variable(in3.float().cuda())
            target_var = torch.autograd.Variable(target.long().cuda())
-
         else:
            input_var1 = torch.autograd.Variable(in1.float())
            input_var2 = torch.autograd.Variable(in2.float())
@@ -59,7 +53,6 @@ def test(val_loader, model, criterion):
 
         # compute output
         output = model(input_var1,input_var2,input_var3)
-
         loss = criterion(output, target_var)
 
         # measure accuracy and record loss
@@ -87,8 +80,6 @@ def test(val_loader, model, criterion):
     return top1.avg
 
 
-
-
 if __name__ == '__main__':
     # Load the trained weights of multi-view VGG16_bn CNN model
     if len(sys.argv) > 1:
@@ -102,7 +93,6 @@ if __name__ == '__main__':
         model.cuda()
 
     print(model)
-
     cudnn.benchmark = True
 
     criterion = nn.CrossEntropyLoss().cuda()

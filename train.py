@@ -17,12 +17,10 @@ import time
 import warnings
 warnings.filterwarnings("ignore")
 
-
 def save_checkpoint(state_dict, is_best, filename='./data/vgg16_current_model.pth.tar'):
     torch.save(state_dict, filename)
     if is_best:
         shutil.copyfile(filename, trained_model_path_best)
-
 
 def adjust_learning_rate(optimizer, epoch):
     """Sets the learning rate to the initial LR decayed by 10 every 10 epochs"""
@@ -33,13 +31,9 @@ def adjust_learning_rate(optimizer, epoch):
 use_gpu = torch.cuda.is_available()
 print_freq=10
 
-
-
 def main():
+
     best_prec1 = 0
-
-
-    # load the multi-view VGG16_bn CNN model
     model = MVConv()
     if use_gpu:
         model.cuda()
@@ -54,7 +48,6 @@ def main():
 
     cudnn.benchmark = True
 
-    # loading the data through csv and preparing dataset
     transformed_train_dataset = ModelNetDataset(root_dir=train_data_root,
                                            phase='train',
                                            transform=transforms.Compose([
@@ -66,8 +59,6 @@ def main():
                                            transform=transforms.Compose([
                                            ToTensor()
                                            ]))
-
-
 
     # Loading dataset into dataloader
     train_loader =  torch.utils.data.DataLoader(transformed_train_dataset, batch_size=train_batch_size,
@@ -134,7 +125,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
         # compute output
         output = model(in1,in2,in3)
-
         loss = criterion(output, target_var)
 
         # measure accuracy and record loss
@@ -162,10 +152,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
                    epoch, i, len(train_loader), batch_time=batch_time,
                    data_time=data_time, loss=losses, top1=top1, top5=top5))
 
-
-# ********************************************************************************************************************
-# Validating the model
-# ********************************************************************************************************************
 
 def validate(val_loader, model, criterion):
     batch_time = AverageMeter()

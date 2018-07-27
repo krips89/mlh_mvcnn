@@ -6,17 +6,13 @@ import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
-
 import torchvision.models as models
-
 
 import warnings
 warnings.filterwarnings("ignore")
 
 plt.ion()
 
-model = models.vgg16_bn(pretrained=True)
-#
 def load_vgg():
     vgg_model = models.vgg16_bn(pretrained=True)
     n_conv = nn.Conv2d(5, 64, kernel_size=3, padding=1)
@@ -28,7 +24,14 @@ def load_vgg():
     n_conv.weight.data[:,4,:,:] = (trained_kernel.data[:, 1, :, :] + trained_kernel.data[:, 2, :, :])/2
     return nn.Sequential(n_conv, feature)
 
-# The model class for multiview cnn with non commutative merge operation
+
+''' The model class for our Multi-View cnn with non-commutative merge operation. For details, please refer to the following paper:
+
+Learning 3D Shapes as Multi-Layered Height-maps using 2D Convolutional Networks
+Kripasindhu Sarkar, Basavaraj Hampiholi, Kiran Varanasi, Didier Stricker	
+Computer Vision -- ECCV 2018 European Conference on Computer Vision (ECCV-2018), September 8-14, Munich, Germany
+
+'''
 class MVConv(nn.Module):
     def __init__(self):
         super(MVConv, self).__init__()
@@ -40,7 +43,8 @@ class MVConv(nn.Module):
                                         nn.ReLU(True),
                                         nn.MaxPool2d(kernel_size=2,stride=1))
 
-        self.classifier = nn.Sequential(model.classifier,
+        base_model = models.vgg16_bn(pretrained=True)
+        self.classifier = nn.Sequential(base_model.classifier,
             nn.ReLU(True),
             nn.Linear(1000, num_classes)
         )
