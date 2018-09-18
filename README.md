@@ -10,12 +10,12 @@ Computer Vision -- ECCV 2018 European Conference on Computer Vision (ECCV-2018),
 Bibtex - 
  
  ```
- @InProceedings{Sarkar2018b,
-  Title                    = {Learning 3D Shapes as Multi-Layered Height-maps using 2D Convolutional Networks},
-  Author                   = {Kripasindhu Sarkar and Basavaraj Hampiholi and Kiran Varanasi and Didier Stricker},
-  Booktitle                = {Computer Vision -- ECCV 2018},
-  Year                     = {2018},
-  Publisher                = {Springer International Publishing},
+@InProceedings{Sarkar_2018_ECCV,
+author = {Sarkar, Kripasindhu and Hampiholi, Basavaraj and Varanasi, Kiran and Stricker, Didier},
+title = {Learning 3D Shapes as Multi-Layered Height-maps using 2D Convolutional Networks},
+booktitle = {The European Conference on Computer Vision (ECCV)},
+month = {September},
+year = {2018}
 }
 ```
 
