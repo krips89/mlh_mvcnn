@@ -3,9 +3,9 @@
 This repo contains the training and testing code for classification using a variation of Multi-view CNN (that uses non comutative merge operation) and *Multi-Layered Height-map* features of 3D shapes. The details are available in the following paper which is to be presented at ECCV 2018:
 
 ```
-Learning 3D Shapes as Multi-Layered Height-maps using 2D Convolutional Networks
-Kripasindhu Sarkar, Basavaraj Hampiholi, Kiran Varanasi, Didier Stricker	
-Computer Vision -- ECCV 2018 European Conference on Computer Vision (ECCV-2018), September 8-14, Munich, Germany	
+Sarkar, Kripasindhu, Basavaraj Hampiholi, Kiran Varanasi, and Didier Stricker. 
+"Learning 3D Shapes as Multi-Layered Height-maps using 2D Convolutional Networks." 
+In Proceedings of the European Conference on Computer Vision (ECCV), pp. 71-86. 2018.
 ```
 Bibtex - 
  
