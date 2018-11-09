@@ -22,6 +22,14 @@ year = {2018}
 Please find the Arxiv preprint of the paper [here](https://arxiv.org/abs/1807.08485).
 
 # Getting started
+
+## Dependencies
+This code is based on **PyTorch**. Just get the latest version of pytorch as per the official website (https://pytorch.org/get-started/locally/). Or run the following command (requires pip) in the shell:
+
+```
+pip install torch torchvision
+```
+## Steps for getting started
 1. Clone this repository (lets say to MLH_MVCNN_ROOT).
 2. Download the MLH features of **ModelNet40** [here](http://www.dfki.uni-kl.de/~sarkar/ML_MN_int_256_5l_3v.zip) and extract it to <mlh_root_path>.
 3. Edit the `train_data_root` variable in config.py to point to <mlh_root_path>.
